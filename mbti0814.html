@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 성격 유형 진단</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .answers label {
+            display: block;
+            margin: 10px 0;
+        }
+        .result {
+            margin-top: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #4CAF50;
+            text-align: center;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>MBTI 성격 유형 진단</h1>
+    
+    <!-- MBTI 진단 질문 -->
+    <div class="question">
+        <p>1. 사람들이 많을 때, 에너지가 더 나나요?</p>
+        <div class="answers">
+            <label>
+                <input type="radio" name="EvsI" value="E"> 예, 사람들과 있을 때 에너지가 차오릅니다.
+            </label>
+            <label>
+                <input type="radio" name="EvsI" value="I"> 아니요, 혼자 있을 때 에너지가 차오릅니다.
+            </label>
+        </div>
+    </div>
+
+    <div class="question">
+        <p>2. 현실적이고 구체적인 정보가 중요하다고 느끼나요?</p>
+        <div class="answers">
+            <label>
+                <input type="radio" name="SvN" value="S"> 예, 구체적이고 실용적인 정보가 중요합니다.
+            </label>
+            <label>
+                <input type="radio" name="SvN" value="N"> 아니요, 큰 그림을 보는 것이 중요합니다.
+            </label>
+        </div>
+    </div>
+
+    <div class="question">
+        <p>3. 결정을 내릴 때, 논리와 객관적인 사실을 우선시하나요?</p>
+        <div class="answers">
+            <label>
+                <input type="radio" name="TvF" value="T"> 예, 논리적인 근거를 중요하게 생각합니다.
+            </label>
+            <label>
+                <input type="radio" name="TvF" value="F"> 아니요, 사람의 감정과 가치를 고려합니다.
+            </label>
+        </div>
+    </div>
+
+    <div class="question">
+        <p>4. 계획을 세우고 이를 따르는 것을 좋아하나요?</p>
+        <div class="answers">
+            <label>
+                <input type="radio" name="JvsP" value="J"> 예, 계획적인 생활을 선호합니다.
+            </label>
+            <label>
+                <input type="radio" name="JvsP" value="P"> 아니요, 자유롭게 상황에 맞춰 행동합니다.
+            </label>
+        </div>
+    </div>
+
+    <button onclick="determineMBTI()">MBTI 결과 확인</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function determineMBTI() {
+        // 각 항목에서 선택한 값을 가져옵니다
+        const EvsI = document.querySelector('input[name="EvsI"]:checked')?.value;
+        const SvN = document.querySelector('input[name="SvN"]:checked')?.value;
+        const TvF = document.querySelector('input[name="TvF"]:checked')?.value;
+        const JvsP = document.querySelector('input[name="JvsP"]:checked')?.value;
+
+        // 모든 질문에 답을 했는지 확인
+        if (!EvsI || !SvN || !TvF || !JvsP) {
+            alert("모든 질문에 답해 주세요.");
+            return;
+        }
+
+        // MBTI 결과 계산
+        const result = EvsI + SvN + TvF + JvsP;
+        
+        // 결과 출력
+        let mbtiType = "";
+        switch (result) {
+            case "ESTJ":
+                mbtiType = "ESTJ - 관리자";
+                break;
+            case "ENTJ":
+                mbtiType = "ENTJ - 지휘자";
+                break;
+            case "ENFJ":
+                mbtiType = "ENFJ - 지도자";
+                break;
+            case "ESFJ":
+                mbtiType = "ESFJ - 외교관";
+                break;
+            case "ISTJ":
+                mbtiType = "ISTJ - 검사관";
+                break;
+            case "ISFJ":
+                mbtiType = "ISFJ - 보호자";
+                break;
+            case "INFJ":
+                mbtiType = "INFJ - 선견자";
+                break;
+            case "INTJ":
+                mbtiType = "INTJ - 전략가";
+                break;
+            case "ESTP":
+                mbtiType = "ESTP - 활동가";
+                break;
+            case "ESFP":
+                mbtiType = "ESFP - 연예인";
+                break;
+            case "ENFP":
+                mbtiType = "ENFP - 캠페이너";
+                break;
+            case "ENTP":
+                mbtiType = "ENTP - 발명가";
+                break;
+            case "ISTP":
+                mbtiType = "ISTP - 장인";
+                break;
+            case "ISFP":
+                mbtiType = "ISFP - 예술가";
+                break;
+            case "INFP":
+                mbtiType = "INFP - 중재자";
+                break;
+            case "INTP":
+                mbtiType = "INTP - 사색가";
+                break;
+            default:
+                mbtiType = "알 수 없는 성격 유형입니다.";
+                break;
+        }
+
+        // 결과 출력
+        document.getElementById("result").textContent = `당신의 MBTI 유형은: ${mbtiType}`;
+    }
+</script>
+
+</body>
+</html>
